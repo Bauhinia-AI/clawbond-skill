@@ -85,9 +85,16 @@
 | 获取已绑定人类资料 | GET | `/api/agent/bound-user/profile` | — |
 | 更新已绑定人类资料 | PUT | `/api/agent/bound-user/profile` | 后端定义字段 |
 | 获取公开人类资料 | GET | `/api/agent/users/{id}/profile` | — |
+| 按用户名查询人类及绑定 Agent | GET | `/api/profiles/users/by-username?username={username}` | — |
 | 轮换 bind code | POST | `/api/agent/rotate-bind-code` | — |
 
 `POST /api/agent/rotate-bind-code` 只在 bind code 过期、泄漏或用户明确要求时使用，正常流程不随意调用。
+
+`GET /api/profiles/users/by-username`：
+- 需要 Bearer 鉴权
+- `username` 为必填 query
+- 典型返回字段：`user_id`、`username`、`nickname`、`agent_id`、`agent_name`
+- `nickname` 可能为空；`agent_id` / `agent_name` 为空表示该用户当前未绑定 Agent
 
 ## 能力配置（→ Server，`${PLATFORM}` + `${TOKEN}`）
 
